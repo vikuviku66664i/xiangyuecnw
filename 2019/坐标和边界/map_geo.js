@@ -1,5 +1,5 @@
 /*
-采集高德省市区（不含扩展区域）三级坐标和行政区域边界，此数据的id为ok_data的id
+采集高德省市区三级坐标和行政区域边界，此数据的id为ok_data的id
 
 关于未获取到坐标或边界的城市，本方案采取不处理策略，空着就空着，覆盖主要城市和主要人群，未覆盖区域实际使用过程中应该进行降级等处理。
 
@@ -7,6 +7,8 @@
 
 
 注：本来想采百度的，但经过使用发现百度数据有严重问题，参考 肃宁县、路南区 边界，百度数据大量线段交叉的无效polygon，没有人工无法修正；并且高德对镂空性质的地块处理比百度强，参考天津市对唐山大块飞地的处理。所以放弃使用百度地图数据。
+
+
 
 
 在高德地图测试页面，选到iframe上下文中执行
@@ -19,6 +21,7 @@ https://lbs.amap.com/api/javascript-api/example/district-search/draw-district-bo
 	
 然后再次运行本代码，如果中途因错误停止，根据提示重复运行
 */
+"use strict";
 AMap.LngLat;
 console=top.console;
 
@@ -62,6 +65,38 @@ if(!window.CITY_LIST_PINYIN){
 
 var pinyinList=CITY_LIST_PINYIN;
 
+//****copy 3_格式化中的数据***
+//添加港澳台数据
+function add(txt){
+	var val=txt.split("|");
+	pinyinList.push({
+		"id": +val[0],
+		"pid": +val[1],
+		"deep": +val[2],
+		"name": val[3],
+		"P2":  val[4],
+		
+		"ext_id": 0
+		,"ext_name": ""
+		
+		,isExt:true
+	});
+};
+//id|pid|deep|name|pinyin
+add("90|0|0|港澳台|~0");
+add("91|0|0|海外|~1");
+
+add("9001|90|1|香港|xiang gang");
+add("9002|90|1|澳门|ao men");
+add("9003|90|1|台湾|tai wan");
+add("9101|91|1|海外|hai wai");
+
+add("900101|9001|2|香港|xiang gang");
+add("900201|9002|2|澳门|ao men");
+add("900301|9003|2|台湾|tai wan");
+add("910101|9101|2|海外|hai wai");
+//****copy end***
+
 
 //人工fix数据
 var fixNames=function(itm){
@@ -97,6 +132,27 @@ var arr={
 		
 		return find;
 	};
+	
+	if(tag.indexOf(":港澳台")+1){
+		var code;
+		if(itm.name=="港澳台"){
+			code=0;
+		}else if(itm.name=="香港"){
+			code="810000";
+		}else if(itm.name=="澳门"){
+			code="820000";
+		}else if(itm.name=="台湾"){
+			code="710000";
+		};
+		if(code==0){
+			console.warn(tag+"为空，接受"+itm.name);
+		};
+		return code?{name:itm.name,code:code}:code;
+	};
+	if(tag.indexOf(":海外")+1){
+		console.warn(tag+"为空，接受海外");
+		return 0;
+	};
 };
 var needReg={};
 
@@ -104,7 +160,6 @@ var needReg={};
 var idMP={};
 for(var i=0;i<pinyinList.length;i++){
 	var o=pinyinList[i];
-	o.child=[];
 	idMP[o.id]=o;
 };
 var newList=[];
@@ -145,7 +200,7 @@ function load(itm, next, _try){
 	var fullPath=itm.fullPath.join(" ");
 	var paths=(itm.id+"0000").substr(0,6);
 	_try=_try||0;
-	_tryfixNameCode="";
+	var _tryfixNameCode="";
 	if(_try==1){
 		paths=itm.name;
 	}else if(_try==2){
@@ -165,7 +220,7 @@ function load(itm, next, _try){
 		needReg[itm.id]=fullPath;
 		console.error(itm.id+":"+fullPath
 			+(isNameNotMatch?
-				"：结果名称不匹配"
+				"：已经fix了但结果未找到"
 				:((isEmptyPaths?"：路径为空":"：结果为空")
 					+"，且未在empty中注册")
 			));
@@ -217,6 +272,9 @@ function load(itm, next, _try){
 				};
 			};
 			
+			if(match&&!match.boundaries.length){
+				match=null;
+			};
 			if(!match){
 				isNameNotMatch=true;
 			};
@@ -227,6 +285,8 @@ function load(itm, next, _try){
 				load(itm, next, _try+1);
 				return;
 			};
+			
+			addNeed(1);
 		}else{
 			geo=match.center.lng+" "+match.center.lat;
 			
@@ -303,9 +363,7 @@ function endload(){
 		
 		list.push({
 			id:o.id
-			,pid:o.pid
-			,deep:o.deep
-			,name:o.name
+			,ext_path:o.fullPath.join(" ")
 			,geo:o.geo
 			,polygon:o.polygon
 		});
