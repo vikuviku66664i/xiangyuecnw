@@ -39,7 +39,7 @@ https://lbs.amap.com/api/javascript-api/example/district-search/draw-district-bo
 		表结构映射中把text类型改成ntext类型（如果文件格式是UCS-2 Lettle Endian会轻松很多）
 		
 通过下列语句生成geometry对象，polygon有可能是POLYGON，也有可能是MULTIPOLYGON，只能通过运算才能知道正确结果
-##tb_polygon表中包含所有的数据，通过id来关联到ok_data数据所在的表（比如把数据update过去）
+全局表##tb_polygon中包含所有的数据，通过id来关联到ok_data数据所在的表（比如把数据update过去）
 ```SQL
 --drop table ##tb_polygon
 create table ##tb_polygon(
@@ -123,6 +123,9 @@ select id,name,geo.STAsText(),polygon from ##tb_polygon where name not like '% %
 
 --select id,name,geo.STAsText(),polygon from ##tb_polygon where name like '%广东省%'
 --select id,name,polygon from ##tb_polygon where polygon.STIntersects(geometry::STGeomFromText('POINT(114.044346 22.691963)',0))=1
+
+--合并数据到ok_data_level4
+--update t1 set geo=t2.geo,polygon=t2.polygon from ok_data_level4 as t1,##tb_polygon as t2 where t1.id=t2.id
 ```
 */
 "use strict";
