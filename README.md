@@ -7,6 +7,19 @@
 `ok_geo.csv.7z`为省市区3级的坐标和行政区域边界范围数据，解压后130M+。
 
 
+## 测试和WEB数据格式转换工具
+
+在线测试工具地址：[https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/](https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/)
+
+或者直接使用`测试和WEB数据格式转换工具.js`，在任意网页控制台中使用。
+
+### 工具支持：
+1. 数据预览。
+2. 将csv数据导出成压缩后的紧凑版js格式文件。
+3. 将csv数据导出成JSON对象、JSON数组。
+4. 网页版省市区镇多级联动测试。
+5. 网页版省市区多级联动代码生成。
+
 ## 数据源
 
 - 国家统计局 > 统计数据 > 统计标准 > [统计用区划和城乡划分代码](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/)
