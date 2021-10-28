@@ -399,16 +399,12 @@ var buildCitySelectFn=function(){
 	function sort(arr,buildFn){
 		var rtv=[];
 		arr.sort(function(a,b){
-			a=a.y;b=b.y;
-			if(!a||!b){
-				return !a&&!b||a?1:-1;
+			var y=a.y.charCodeAt(0)-b.y.charCodeAt(0);
+			if(y){
+				return y;
+			}else{
+				return a.name.localeCompare(b.name);
 			};
-			for(var i=0;i<a.length;i++){
-				if(a[i]!=b[i]){
-					return a[i]>b[i]?1:-1;
-				};
-			};
-			return 1;
 		});
 		for(var i=0,o,name;i<arr.length;i++){
 			o=arr[i];
