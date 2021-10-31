@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 """
-GitHub: https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov/.pinyin-python-server
+GitHub: https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov/assets/pinyin-python-server
 
 使用的HanLP (https://github.com/hankcs/HanLP) 语言处理库
 
