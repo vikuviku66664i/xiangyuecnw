@@ -403,7 +403,7 @@ var buildCitySelectFn=function(){
 			if(y){
 				return y;
 			}else{
-				return a.name.localeCompare(b.name);
+				return (a.y+a.name).localeCompare(b.y+b.name);
 			};
 		});
 		for(var i=0,o,name;i<arr.length;i++){
