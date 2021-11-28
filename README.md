@@ -38,7 +38,7 @@ chrome 控制台，`Chrome 41`这版本蛮好，win7能用，`Chrome 46`这版�
 
 ## 采集深度
 
-- 2018.190929.0722版(2019)采集了4层，省、市、区、镇，来源：[统计局2018版数据](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/index.html)；省市区3级合并了[民政部2019-09-29数据](http://www.mca.gov.cn/article/sj/tjyb/qgsj/2019/201909291543.html)、[高德地图行政区域](https://lbs.qq.com/webservice_v1/guide-region.html)、[腾讯地图行政区划v20190722](https://lbs.qq.com/webservice_v1/guide-region.html)数据；镇级采用腾讯地图行政区划作为主要数据，综合高德和统计局的镇级。采集高德省市区三级坐标和行政区域边界范围。
+- 2018.190929.0722版(2019)采集了4层，省、市、区、镇，来源：[统计局2018版数据](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/index.html)；省市区3级合并了[民政部2019-09-29数据](http://www.mca.gov.cn/article/sj/tjyb/qgsj/2019/201909291543.html)、[高德地图行政区域](https://lbs.amap.com/api/webservice/guide/api/district)、[腾讯地图行政区划v20190722](https://lbs.qq.com/webservice_v1/guide-region.html)数据；镇级采用腾讯地图行政区划作为主要数据，综合高德和统计局的镇级。采集高德省市区三级坐标和行政区域边界范围。
 - 2018版(2019)采集了4层，省、市、区、镇，来源：[统计局2018版数据](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/index.html)；省市区3级额外合并了[民政部2019-08-27数据](http://www.mca.gov.cn/article/sj/xzqh/2019/201908/201908271607.html)。采集高德省市区三级坐标和行政区域边界范围。
 - 2017版(2018)采集了3层，省、市、区，来源：[统计局2017版数据](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/index.html)。
 - 2016版(2017)采集了3层，省、市、区，来源：[统计局2016版数据](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2016/index.html)。
@@ -112,7 +112,7 @@ polygon|行政区域边界，高德地图`GCJ-02`火星坐标系。格式："lng
 镇级以下地名采用本地拼音库（`assets/pinyin-python-server`）转换，准确度没有省市区的高。
 
 ## 拼音前缀
-目前采用的是截取第一个字拼音的首字母。
+目前采用的是截取第一个字拼音的首字母，和港澳台、国外特殊指定前缀。
 
 ### 排序方案：
 
@@ -120,7 +120,7 @@ polygon|行政区域边界，高德地图`GCJ-02`火星坐标系。格式："lng
 
 方案二(2018版废弃)：取的是第一个字前两个字母和后两个字首字母排序：`河北:heb` `黑龙江:helj` `河南:hen` `湖北:hub` `湖南:hun`
 
-方案三(返璞归真)：取第一个字首字母进行排序，如果两个字母相同，再使用(首字母或自定义前缀)+(名称)进行排序：`河北:h.河北` `河南:h.河南` `黑龙江:h.黑龙江` `湖北:h.湖北` `湖南:h.湖南` `香港:~1.香港` `澳门:~2.澳门`
+方案三(返璞归真)：取第拼音前缀首字母进行排序，如果两个字母相同，再使用(首字母前缀或自定义前缀)+(名称)进行排序：`河北:h.河北` `河南:h.河南` `黑龙江:h.黑龙江` `湖北:h.湖北` `湖南:h.湖南` `香港:~1.香港` `澳门:~2.澳门`
 
 排序方案三看起来好些；为什么不直接用名称文本进行排序，我怕不同环境下对多音字不友好，最差情况下也不会比方案一差，并且排序可透过前缀实施自定义控制。
 
