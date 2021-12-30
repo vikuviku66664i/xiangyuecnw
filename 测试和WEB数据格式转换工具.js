@@ -6,7 +6,7 @@ GitHub: https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov
 在任意网页控制台执行本代码。另外：index.html已经包含了此代码，双击就能运行，使用http访问更佳。
 */
 "use strict";
-var AllowAccessFolder="2019/采集到的数据";
+var AllowAccessFolder="src/采集到的数据";
 var AllowAccessFiles=["ok_data_level3.csv(3级省市区)","ok_data_level4.csv(4级省市区镇)"];
 
 
