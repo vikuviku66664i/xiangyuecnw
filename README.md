@@ -1,6 +1,6 @@
 # :open_book:省市区数据采集并标注拼音、坐标和边界范围
 
-[省市区镇四级数据在线测试和预览](https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/)（支持转换成JSON、多级联动js）；[坐标、边界范围转换：AreaCity-Geo格式转换工具软件下载](https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/assets/AreaCity-Geo-Transform-Tools.html)（支持转成`shp`、`geojson`、`sql`、`导入数据库`）；当前最新版为 **src文件夹** 内的数据，此数据发布于`统计局2020-02-25`、`民政部2020-03-06`、`腾讯地图行政区划2020-02-20`、`高德地图行政区划采集当天`。
+[省市区镇四级数据在线测试和预览](https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/)（支持转换成JSON、多级联动js）；坐标、边界范围转换：[AreaCity-Geo格式转换工具软件下载](https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/assets/AreaCity-Geo-Transform-Tools.html)（支持转成`shp`、`geojson`、`sql`、`导入数据库`）；当前最新版为 **src文件夹** 内的数据，此数据发布于`统计局2020-02-25`、`民政部2020-03-06`、`腾讯地图行政区划2020-02-20`、`高德地图行政区划采集当天`。
 
 
 <p align="center"><a href="https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov"><img width="100" src="https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov/raw/master/assets/icon.png" alt="AreaCity logo"></a></p>
