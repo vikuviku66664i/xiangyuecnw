@@ -533,7 +533,7 @@ Runtime.UpdateStatus=function(msg){
 	if(tgEnable){
 		var tgVal=tgEnable();
 		if(tgVal){
-			html.push('<span style="color:#0b1">坐标系转换插件已启用('+tgVal+')<button onclick="Runtime.translateGeoDisable()">禁用</button></span>');
+			html.push('<span style="color:#0b1">坐标系转换插件已启用('+tgVal+')，在处理ok_geo.csv数据时会自动调用本坐标系转换<button onclick="Runtime.translateGeoDisable()">禁用</button></span>');
 		};
 	};
 	

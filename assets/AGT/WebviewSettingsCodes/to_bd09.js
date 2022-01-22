@@ -53,6 +53,7 @@ Runtime.Import([
 //显示控制按钮
 Runtime.Ctrls([
 	{name:"测试转换精度",click:"bd09Test"}
+	,{html:'<span style="font-size:12px">本插件无需手动操作，在处理ok_geo.csv数据时会自动调用本坐标系转换；转换前你可以点击“测试转换精度”来查看当前代码的转换精度是否符合你的要求。</span>'}
 ]);
 
 window.bd09Test=function(){
