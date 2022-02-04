@@ -20,7 +20,7 @@ Runtime.translateGeoDisable();//停用坐标转换
 //显示控制按钮
 Runtime.Ctrls([
 	{name:"ok_data_level*.csv 省市区镇转SQL",click:"CityToSQLClick"}
-	,{html:'<span style="font-size:12px">免费版、付费版均可导出所有数据；如果你想生成多级联动js或json数据，请使用本库的<a href="https://xiangyuecn.github.io/AreaCity-JsSpider-StatsGov/" target="_blank">在线转换工具</a></span>'}
+	,{html:'<span style="font-size:12px">免费版、付费版均可导出所有数据；如果你想生成多级联动js或json数据，请使用本库的<a href="https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/" target="_blank">在线转换工具</a></span>'}
 	,{html:
 '<div style="font-size:14px">\
 	<style>\
