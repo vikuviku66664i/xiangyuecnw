@@ -14,24 +14,28 @@
 </p>
 
 
-在[Releases](https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov/releases)中下载最新发布数据文件；如果下载缓慢可以[点此处](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/download.html)通过GitHub Pages外链来下载；也可直接打开 `src/采集到的数据` 文件夹内的文件来使用：
-- [/src/采集到的数据/ok_data_level3.csv](src/采集到的数据/ok_data_level3.csv) : 省市区3级数据(可以预览)。
-- [/src/采集到的数据/ok_data_level4.csv](src/采集到的数据/ok_data_level4.csv) : 省市区镇4级数据(3M+大小GitHub不能预览)。
-- [/src/采集到的数据/ok_geo.csv.7z](src/采集到的数据/ok_geo.csv.7z) : 为省市区3级的坐标和行政区域边界范围数据，csv格式，解压后130M+。
+在[Releases](https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov/releases)中下载最新发布数据文件，也可直接打开 `src/采集到的数据` 文件夹内的文件来使用；如果下载缓慢可以[点此处通过Gitee Pages外链](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/download.html)来下载：
+- [/src/采集到的数据/ok_data_level3.csv](https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov/raw/master/src/采集到的数据/ok_data_level3.csv) : 省市区3级数据([预览](src/采集到的数据/ok_data_level3.csv))。
+- [/src/采集到的数据/ok_data_level4.csv](https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov/raw/master/src/采集到的数据/ok_data_level4.csv) : 省市区镇4级数据(3M+大小GitHub不能预览)。
+- [/src/采集到的数据/ok_geo.csv.7z](https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov/raw/master/src/采集到的数据/ok_geo.csv.7z) : 为省市区3级的坐标和行政区域边界范围数据，csv格式，解压后130M+。
 
 > csv格式非常方便解析成其他格式，算是比较通用；如果在使用csv文件过程中出现乱码、错乱等情况，需自行调对utf-8（带BOM）编码（或者使用文本编辑器 `如 notepad++` 把文件转成需要的编码），文本限定符为`"`。
 > 
 > 通过[AreaCity-Geo格式转换工具](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/AreaCity-Geo-Transform-Tools.html)可快速方便的将省市区、坐标、边界范围导入数据库，并且提供格式转换功能。
 > 
 > 手动导入csv文件到数据库如果接触的比较多应该能很快能完成导入，省市区数据参考[导入教程](https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov/blob/master/src/3_%E6%A0%BC%E5%BC%8F%E5%8C%96.js)、坐标和边界参考[导入教程](https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov/blob/master/src/%E5%9D%90%E6%A0%87%E5%92%8C%E8%BE%B9%E7%95%8C/map_geo_%E6%A0%BC%E5%BC%8F%E5%8C%96.js)，教程在代码开头注释中，是SQL Server的导入流程和SQL语句。
-
-**温馨建议：不要在没有动态更新机制的情况下把数据嵌入到Android、IOS、等安装包内；缓存数据应定期从服务器拉取更新**
+> 
+> **温馨建议**：不要在没有动态更新机制的情况下把数据嵌入到Android、IOS、等安装包内；缓存数据应定期从服务器拉取更新。
 
 注：本库最高采集省市区镇4级数据、省市区3级边界范围，如果需要街道5级数据、或者更高精度的边界范围，请参考底下的`其他资源`。
 
-## 如何clone
+## 如何clone: Gitee镜像库加速
 由于历史记录数据异常庞大，几乎每次commit都有40M+的新采集数据，所以你直接clone会很慢的，加上`--depth 1`提取最新版的数据即可。
-```
+``` java
+//Gitee镜像仓库: 速度快
+git clone --depth 1 https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov.git
+
+//原始GitHub仓库: 慢的一逼
 git clone --depth 1 https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov.git
 ```
 
