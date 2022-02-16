@@ -407,6 +407,27 @@ $(window).bind("error",function(e){
 
 <script>
 $(function(){
+
+Runtime.VersionLess=function(ver,_ver){
+	var arr=(ver||"").split(".");
+	var cur=(_ver||InitReadConfig.AppVersion||"").split(".");
+	for(var i=0;;i++){
+		if(i>=cur.length){
+			return false;
+		};
+		if(i>=arr.length){
+			return true;
+		};
+		if(arr[i]!=cur[i]){
+			if((+arr[i]||0)<(+cur[i]||0)){
+				return true;
+			};
+			return false;
+		};
+	};
+	return false;
+};
+
 var codeRunCtrl;
 Runtime.CodeRunImport=function(){
 	if(codeRunCtrl==1){
@@ -608,6 +629,8 @@ AppCmds.ready();
 	Runtime.SetCode(code) 输入框内显示代码
 	
 	Runtime.UpdateStatus(msg) 更新显示状态信息
+	
+	Runtime.VersionLess(ver) 当前版本是否低于此版本
 	
 	Runtime.AppCalls={***} 实现window.AppCalls相关方法给软件调用，如果不提供将使用默认方法
 </script>
