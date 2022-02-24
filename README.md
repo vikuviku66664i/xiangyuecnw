@@ -2,7 +2,7 @@
 
 # :open_book:省市区数据采集并标注拼音、坐标和边界范围
 
-[省市区镇四级数据在线测试和预览](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/)（支持转换成JSON、多级联动js）；导入数据库或坐标、边界范围转换：[AreaCity-Geo格式转换工具软件下载](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/AreaCity-Geo-Transform-Tools.html)（支持转成`sql`、导入数据库，转成`shp`、`geojson`）；当前最新版为 **src文件夹** 内的数据，此数据发布于`统计局2020-11-06`、`民政部2020-11-20`、`腾讯地图行政区划2020-08-14`、`高德地图行政区划采集当天`。
+[省市区镇四级数据在线测试和预览](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/)（支持转换成JSON、多级联动js）；[ECharts Map四级下钻在线测试和预览+代码生成](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/geo-echarts.html)（坐标边界范围在线测试预览）；导入数据库或坐标、边界范围转换：[AreaCity-Geo格式转换工具软件下载](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/AreaCity-Geo-Transform-Tools.html)（支持转成`sql`、导入数据库，转成`shp`、`geojson`）；当前最新版为 **src文件夹** 内的数据，此数据发布于`统计局2020-11-06`、`民政部2020-11-20`、`腾讯地图行政区划2020-08-14`、`高德地图行政区划采集当天`。
 
 
 <p align="center"><a href="https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov"><img width="100" src="https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov/raw/master/assets/icon.png" alt="AreaCity logo"></a></p>
@@ -171,6 +171,10 @@ polygon|string|行政区域边界，高德地图`GCJ-02`火星坐标系。格式
 并且高德对镂空性质的地块处理比百度强，参考`天津市`对`唐山`大块飞地的处理，高德数据只需要`Union`操作就能生成`polygon`，百度既有`Union`操作又有`Difference`操作，极其复杂数据还无效。
 
 所以放弃使用百度地图数据。
+
+
+## 在线测试和预览
+坐标边界范围在线测试预览地址：[ECharts Map四级下钻在线测试和预览+代码生成](https://xiangyuecn.gitee.io/areacity-jsspider-statsgov/assets/geo-echarts.html)
 
 
 ## 如何使用坐标和边界数据

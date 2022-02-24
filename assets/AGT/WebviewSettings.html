@@ -61,7 +61,7 @@ var AppCalls={
 		};
 	}
 };
-var LM="2020-5-30 17:06:02";
+var LM="2021-2-10 16:02:51";
 </script>
 
 <style>
@@ -278,6 +278,7 @@ select,select option{
 	<option value="">==== GCJ-02（高德）转其他坐标系 ====</option>
 	<option value="to_bd09">[插件] 转成 BD-09 百度地图 [误差约1米内]</option>
 	<option value="to_wgs84">[插件] 转成 WGS-84 GPS 谷歌地图 [误差约10米内]</option>
+	<option value="to_wgs84">[插件] 转成 CGCS2000 天地图 [误差约10米内] ≈GPS</option>
 	
 	<option value=""></option>
 	<option value="">==== 省市区镇转SQL、导入数据库 ====</option>
@@ -286,6 +287,8 @@ select,select option{
 	
 	<option value=""></option>
 	<option value="">==== 其他代码 ====</option>
+	<option value="gps_to_gcj02">[Test] WGS-84 GPS/CGCS2000 转成 GCJ-02</option>
+	<option value="gps_to_bd09">[Test] WGS-84 GPS/CGCS2000 转成 BD-09</option>
 	<option value="exec/appcmds_test">[Test] 浏览器接口测试用例</option>
 </select>
 </script>
@@ -408,18 +411,18 @@ $(window).bind("error",function(e){
 <script>
 $(function(){
 
-Runtime.VersionLess=function(ver,_ver){
+Runtime.VersionLess=function(ver,_cur){
 	var arr=(ver||"").split(".");
-	var cur=(_ver||InitReadConfig.AppVersion||"").split(".");
+	var cur=(_cur||InitReadConfig.AppVersion||"").split(".");
 	for(var i=0;;i++){
-		if(i>=cur.length){
+		if(i>=arr.length){
 			return false;
 		};
-		if(i>=arr.length){
+		if(i>=cur.length){
 			return true;
 		};
 		if(arr[i]!=cur[i]){
-			if((+arr[i]||0)<(+cur[i]||0)){
+			if((+arr[i]||0)>(+cur[i]||0)){
 				return true;
 			};
 			return false;

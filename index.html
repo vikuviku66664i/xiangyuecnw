@@ -87,10 +87,19 @@ if(/^file:/.test(location.href)){
 };
 </script>
 
+<!-- 加载echarts map测试挂件 -->
+<script src="assets/geo-echarts.js"></script>
+<div class="GeoEChartsView"></div>
+<script>
+GeoECharts.CreateWidget({
+	mobElem:document.querySelector(".GeoEChartsView")
+});
+</script>
+
 <!-- 加载打赏挂件 -->
 <div class="DonateLogs"></div>
 <div class="DonateView"></div>
-<script crossorigin="anonymous" src="https://xiangyuecn.gitee.io/recorder/assets/zdemo.widget.donate.js"></script>
+<script src="https://xiangyuecn.gitee.io/recorder/assets/zdemo.widget.donate.js"></script>
 <script>
 DonateWidget({
 	log:function(msg){var div=document.createElement("div");div.innerHTML=msg;document.querySelector(".DonateLogs").appendChild(div)}
