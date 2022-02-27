@@ -13,7 +13,7 @@ GitHub: https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov
 ECharts Map四级下钻核心源码，仅供参考
 
 【使用步骤一：获取lib对象】
-var libObj=GeoECharts.GeoEChartsLib(echarts);//如果不提供echarts参数，将会自动加载geoEChartsLib.path对应的js到全局中
+var libObj=GeoEChartsLib(echarts);//如果不提供echarts参数，将会自动加载geoEChartsLib.path对应的js到全局中
 
 【使用步骤二：显示ECharts】
 var geoECharts=libObj.Create({
@@ -510,60 +510,74 @@ geoECharts.load(); //开始加载数据，加载成功后会显示图形
 				endCall("浏览器不支持Indexdb");
 				return;
 			};
-			var DBi=indexedDB.open('cache_geo_echarts', 1);
-			DBi.onupgradeneeded=function(e){
-				var db = e.target.result;
-				if (!db.objectStoreNames.contains('keyvalue')) {
-					var tab = db.createObjectStore('keyvalue', {
-						keyPath: "key"
-					});
-				};
-			};
-			DBi.onerror=function(e){
+			var fail=function(e){
 				var err="GeoECharts数据库打开失败："+e.message;
 				console.error(err,e);
 				endCall(err);
 			};
-			DBi.onsuccess=function(e){
-				This.DB=e.target.result;
-				endCall();
-			};
+			try{
+				var DBi=indexedDB.open('cache_geo_echarts', 1);
+				DBi.onupgradeneeded=function(e){
+					var db = e.target.result;
+					if (!db.objectStoreNames.contains('keyvalue')) {
+						var tab = db.createObjectStore('keyvalue', {
+							keyPath: "key"
+						});
+					};
+				};
+				DBi.onsuccess=function(e){
+					This.DB=e.target.result;
+					endCall();
+				};
+				DBi.onerror=fail;
+			}catch(e){
+				fail(e);
+			}
 		}
 		,Get:function(key,True,False){
 			if(this.initStatus!=10){
 				False("GeoECharts数据库未准备好");
 				return;
 			};
-			var tran=this.DB.transaction('keyvalue');
-			var req=tran.objectStore('keyvalue').get(key);
-			req.onsuccess = function (e) {
-				True(req.result&&req.result.value||"");
-			};
-			req.onerror=function(e){
-				var err="GeoECharts数据库读取["+key+"]失败";
+			var fail=function(e){
+				var err="GeoECharts数据库读取["+key+"]失败："+e.message;
 				console.error(err,e);
 				False(err);
 			};
+			try{
+				var tran=this.DB.transaction('keyvalue');
+				var req=tran.objectStore('keyvalue').get(key);
+				req.onsuccess = function (e) {
+					True(req.result&&req.result.value||"");
+				};
+				req.onerror=fail;
+			}catch(e){
+				fail(e);
+			}
 		}
 		,Set:function(key,val,True,False){
 			if(this.initStatus!=10){
 				False("GeoECharts数据库未准备好");
 				return;
 			};
-			var tran=this.DB.transaction('keyvalue', 'readwrite');
-			var req=tran.objectStore('keyvalue').put({
-				desc:"无需采集，仔细看demo页面，数据可以直接下载",
-				key:key, value:val
-			});
-			req.onsuccess = function (e) {
-				True();
-			};
-			req.onerror=function(e){
-				var err="GeoECharts数据库保存数据["+key+"]失败";
+			var fail=function(e){
+				var err="GeoECharts数据库保存数据["+key+"]失败："+e.message;
 				console.error(err,e);
 				False(err);
 			};
-			tran.commit();
+			try{
+				var tran=this.DB.transaction('keyvalue', 'readwrite');
+				var req=tran.objectStore('keyvalue').put({
+					desc:"无需采集，仔细看demo页面，数据可以直接下载",
+					key:key, value:val
+				});
+				req.onsuccess = function (e) {
+					True();
+				};
+				req.onerror=fail;
+			}catch(e){
+				fail(e);
+			}
 		}
 	};
 	
@@ -603,9 +617,12 @@ if(/(.+)\/assets\//.test(Root)){
 GeoECharts.CreateWidget=function(set){
 	set=set||{};
 	
-	var elem=0,width="300px",height="260px";
+	var width="300px",height="260px";
 	if(GeoECharts.IsMobile){
-		elem=set.mobElem;
+		var mel=set.mobElem;
+		if(mel){
+			mel.innerHTML='<div class="GeoEChartsWidget_render" style="line-height:0;padding: 12px;border-radius: 12px;background: linear-gradient(160deg, rgba(0,179,255,.7) 20%, rgba(177,0,255,.7) 80%);"></div>';
+		};
 	}else{
 		var ls=document.querySelectorAll(".GeoEChartsWidget");
 		for(var i=0;i<ls.length;i++){
@@ -619,8 +636,8 @@ GeoECharts.CreateWidget=function(set){
 	<div class="GeoEChartsWidget_render" style="line-height:0;padding: 12px;border-radius: 12px;background: linear-gradient(160deg, rgba(0,179,255,.7) 20%, rgba(177,0,255,.7) 80%);"></div>\
 </div>';
 		document.body.appendChild(fixedElem);
-		elem=document.querySelector(".GeoEChartsWidget_render");
 	};
+	var elem=document.querySelector(".GeoEChartsWidget_render");
 	if(!elem){
 		console.warn("GeoECharts.CreateWidget未提供显示容器",set);
 		return;
@@ -646,7 +663,7 @@ GeoECharts.WidgetShow=function(show){
 		var fixedElem=document.createElement("div");
 		fixedElem.innerHTML='\
 <div onclick="GeoECharts.WidgetShow(1)" class="GeoEChartsWidget2" style="z-index:'+getZIndex()+';position: fixed;display:flex;align-items:center;justify-content:center;bottom:10px;right:5px">\
-	<div class="GeoEChartsWidget_render" style="padding: 12px 18px;border-radius: 12px;background: linear-gradient(160deg, rgba(0,179,255,.7) 20%, rgba(177,0,255,.7) 80%); font-size:12px;color:#fff;cursor: pointer;">边界<br>预览</div>\
+	<div style="padding: 12px 18px;border-radius: 12px;background: linear-gradient(160deg, rgba(0,179,255,.7) 20%, rgba(177,0,255,.7) 80%); font-size:12px;color:#fff;cursor: pointer;">边界<br>预览</div>\
 </div>';
 		document.body.appendChild(fixedElem);
 	};

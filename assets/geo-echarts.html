@@ -119,7 +119,14 @@ body::-webkit-scrollbar-thumb{
 	background-color: rgba(144, 146, 152, 0.3);
 }
 </style>`);
-};
+}else if(GeoECharts.IsMobile){
+	$("body").append(`
+<style>
+.main{
+	padding:0 5px 80px;
+}
+</style>`);
+}
 </script>
 
 
@@ -136,7 +143,7 @@ body::-webkit-scrollbar-thumb{
 	</div>
 	
 	<div class="mainBox" class2="">
-		<div class="FlexBox">
+		<div class="FlexBox" class3="">
 			<div class="FlexItem" class2="Hide2">
 				<div class="mapView"></div>
 			</div>
@@ -197,7 +204,7 @@ body::-webkit-scrollbar-thumb{
 	</div>
 	
 	<div class="mainBox">
-		<div class="FlexBox" class2="">
+		<div class="FlexBox" class2="" class3="">
 			<div class="FlexItem">
 				<div style="font-size:26px;font-weight:bold;padding-bottom:10px">
 					ECharts Map四级下钻核心源码（前端）
@@ -224,18 +231,26 @@ body::-webkit-scrollbar-thumb{
 
 <script>
 var Review=function(){
+	var s,c;
 	if(IsWidget){
-		var ls=$("[style2]");
-		for(var i=0;i<ls.length;i++){
-			var el=$(ls[i]);
-			el.attr("style", el.attr("style2"));
-		}
-		var ls=$("[class2]");
-		for(var i=0;i<ls.length;i++){
-			var el=$(ls[i]);
-			el.attr("class", el.attr("class2"));
-		}
+		s="style2";
+		c="class2";
+	}else if(GeoECharts.IsMobile){
+		s="style3";
+		c="class3";
 	};
+	if(s){
+		var ls=$("["+s+"]");
+		for(var i=0;i<ls.length;i++){
+			var el=$(ls[i]);
+			el.attr("style", el.attr(s));
+		}
+		var ls=$("["+c+"]");
+		for(var i=0;i<ls.length;i++){
+			var el=$(ls[i]);
+			el.attr("class", el.attr(c));
+		}
+	}
 };
 Review();
 
