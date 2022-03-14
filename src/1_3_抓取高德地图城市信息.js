@@ -10,7 +10,7 @@ https://lbs.amap.com/api/webservice/guide/api/district
 var SaveName="Step1_3_Amap";
 
 $.ajax({
-	url:"https://lbs.amap.com/dev/api?keywords=中国&subdistrict=3&extensions=base"
+	url:"https://developer.amap.com/service/api/restapi?keywords=中国&subdistrict=3&extensions=base"
 	,method:"POST"
 	,data:{type:"config/district",version:"v3"}
 	,dataType:"json"

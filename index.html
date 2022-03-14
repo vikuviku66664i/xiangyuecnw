@@ -8,29 +8,126 @@
 </head>
 
 <body>
-<div class="lowB">本工具未支持low b浏览器，换个吧&#x1f644;</div><script>document.querySelector(".lowB").innerHTML=``;</script>
-
-<div style="text-align: center; font-size:18px">
-	本工具是用来转换省市区镇四级数据的，不支持坐标和城市边界范围的处理，如果你要转换坐标和城市边界范围数据（如shp、geojson、sql），<a href="assets/AreaCity-Geo-Transform-Tools.html" target="_blank">请点此处下载“AreaCity-Geo格式转换工具软件”转换</a>。
-</div>
-
-<script src="测试和WEB数据格式转换工具.js"></script>
-
+<div class="lowB" style="font-size: 50px;text-align: center;color: #f60;">本工具未支持low b浏览器，换个吧&#x1f644;</div><script>document.querySelector(".lowB").innerHTML=``;</script>
 
 <style>
 body{
 	word-wrap: break-word;
+	background:#f5f5f5 center top no-repeat;
+	background-size: auto 680px;
+	
+	font-size:16px;
+}
+.main{
+	margin:0 auto;
+	padding:0 50px 80px;
 }
 pre{
 	white-space:pre-wrap;
 }
 
-.AreaFormat {
+.main .AreaFormat {
 	position: relative;
-	top:0;
+	top:0;left:0;width:100%;
 	margin-top:20px;
 }
+
+
+a{
+	text-decoration: none;
+	color:#06c;
+}
+a:hover{
+	color:#f00;
+}
+p{
+	text-indent: 32px;
+}
+img{
+	max-width:90%;
+}
+
+.Center{
+	text-align: center;
+}
+
+
+.mainBox{
+	margin-top:12px;
+	padding: 12px;
+	border-radius: 6px;
+	background: #fff;
+	--border: 1px solid #f60;
+	box-shadow: 2px 2px 3px #aaa;
+}
+
+.lb{
+	display:inline-block;
+	vertical-align: middle;
+	background:#00940e;
+	color:#fff;
+	font-size:14px;
+	padding:2px 8px;
+	border-radius: 99px;
+}
+
+.pd{
+	padding:0 0 6px 0;
+}
+.del{
+	text-decoration: line-through;
+}
+.b{
+	font-weight: bold;
+	font-style: normal;
+}
+.i{
+	padding: 2px 4px;
+	background-color: #f6f6f6;
+	vertical-align: middle;
+	color: #c7254e;
+	font-size: 12px;
+	white-space: pre-wrap;
+	border-radius: 3px;
+	font-style: normal;
+}
 </style>
+
+
+<div class="main">
+	<div class="mainBox">
+		<span style="font-size:32px;color:#0B0;">AreaCity 测试和WEB数据格式转换工具</span>
+		<a href="https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov">GitHub >></a> |
+		<a href="https://gitee.com/xiangyuecn/AreaCity-JsSpider-StatsGov">Gitee >></a>
+		
+		<div style="padding-top:10px">
+			<span class="lb">小提示 :</span>
+			本工具是用来转换省市区镇四级数据为js支持的格式的，不支持导入数据库，也不支持处理坐标和城市边界范围书记，如果你要导入数据库、或转换坐标和城市边界范围数据（如shp、geojson、sql），<a href="assets/AreaCity-Geo-Transform-Tools.html" target="_blank">请点此处下载《AreaCity-Geo格式转换工具软件》</a>轻松处理。
+		</div>
+		<div style="padding-top:10px">
+			<span style="margin-right:20px">
+				<span class="lb">【四级】省市区镇 4级数据 :</span> <a href="assets/download.html" target="_blank">点此下载</a>
+			</span>
+			
+			<span style="margin-right:20px">
+				<span class="lb">【GEO三级】省市区 坐标+边界范围 :</span> <a href="assets/download.html" target="_blank">点此下载</a>
+			</span>
+			
+			<span style="margin-right:20px">
+				<span class="lb">【GEO四级】乡镇 坐标+边界范围  :</span> <a href="assets/geo-level4.html" target="_blank">点此下载</a>
+			</span>
+			
+			<span style="margin-right:20px">
+				<span class="lb">坐标边界在线预览  :</span> <a href="assets/geo-echarts.html" target="_blank">点此测试</a>
+			</span>
+		</div>
+	</div>
+
+	<script>var AreaFormatBoxElem=document.querySelector(".main")</script>
+	<script src="测试和WEB数据格式转换工具.js"></script>
+
+	<div class="mainBox DonateLogs"></div>
+</div>
 
 <script src="https://xiangyuecn.gitee.io/buildhtml/buildhtml.js"></script>
 <script>
@@ -102,7 +199,6 @@ GeoECharts.CreateWidget({
 </script>
 
 <!-- 加载打赏挂件 -->
-<div class="DonateLogs"></div>
 <div class="DonateView"></div>
 <script src="https://xiangyuecn.gitee.io/recorder/assets/zdemo.widget.donate.js"></script>
 <script>

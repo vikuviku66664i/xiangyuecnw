@@ -149,7 +149,7 @@ for(var i=0;i<pinyinList.length;i++){
 	var o=pinyinList[i];
 	
 	//fix issues#2
-	if((o.id+"").indexOf("130225")+1 && /乐[亭安]/.test(o.name)){
+	if((o.id+"").indexOf("130225")==0 && /乐[亭安]/.test(o.name)){
 		o.P&&(o.P=o.P.replace(/le([\s\|]+(?:ting|an))/g,"lao$1"));
 		o.P2&&(o.P2=o.P2.replace(/le([\s\|]+(?:ting|an))/g,"lao$1"));
 		
@@ -162,6 +162,27 @@ for(var i=0;i<pinyinList.length;i++){
 		o.P2&&(o.P2=o.P2.replace(/dang/g,"tan"));
 		
 		console.log("人工fix数据", "宕:tan", o.name, o);
+	};
+	//fix QQ 85005150 2021-2-21
+	if(o.id==131025 && /大城县/.test(o.name)){
+		o.P&&(o.P=o.P.replace(/dai/g,"da"));
+		o.P2&&(o.P2=o.P2.replace(/dai/g,"da"));
+	};
+	if(o.id==141024 && /洪洞县/.test(o.name)){
+		o.P&&(o.P=o.P.replace(/dong/g,"tong"));
+		o.P2&&(o.P2=o.P2.replace(/dong/g,"tong"));
+	};
+	if((o.id+"").indexOf("540531")==0 && /浪卡子/.test(o.name)){
+		o.P&&(o.P=o.P.replace(/qia/g,"ka"));
+		o.P2&&(o.P2=o.P2.replace(/qia/g,"ka"));
+	};
+	
+	
+	if(/lve/.test(o.P)){
+		o.P&&(o.P=o.P.replace(/lve/g,"lue"));
+	};
+	if(/lve/.test(o.P2)){
+		o.P2&&(o.P2=o.P2.replace(/lve/g,"lue"));
 	};
 };
 

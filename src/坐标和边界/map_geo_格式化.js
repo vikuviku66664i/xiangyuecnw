@@ -164,7 +164,7 @@ function CSVName(name){
 	return '"'+FixTrim(name).replace(/"/g,'""')+'"';
 };
 
-var csv=["id,ext_path,geo,polygon"];
+var csv=["id,pid,deep,name,ext_path,geo,polygon"];
 for(var k=0;k<DATA_GEO.length;k++){
 	var o=DATA_GEO[k];
 	console.log(k,o.ext_path);
@@ -198,7 +198,8 @@ for(var k=0;k<DATA_GEO.length;k++){
 		break;
 	};
 	
-	csv.push(o.id+","+CSVName(o.ext_path)
+	csv.push(o.id+","+o.pid+","+o.deep
+		+","+CSVName(o.name)+","+CSVName(o.ext_path)
 		+","+CSVName(o.geo)+","+CSVName(polygon));
 };
 csv.push("");
