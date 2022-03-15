@@ -3,6 +3,8 @@
 只需一次性获得省市区三级即可，乡镇这一级高德没有给出编码，因此放弃全使用高德数据，仅用来验证。
 
 在以下页面执行
+https://developer.amap.com
+
 https://lbs.amap.com/api/webservice/guide/api/district
 */
 "use strict";

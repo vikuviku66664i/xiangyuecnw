@@ -39,6 +39,16 @@ var fixQQmapRemoveBeforeAmp={
 	350402:{
 		name:"梅列区",level:3,msg:"合并到了三明市三元区，简单移除，不管下级"
 	}
+	
+	,320602:{name: "崇川区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,320684:{name: "海门区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,330103:{name: "下城区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,330104:{name: "江干区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,340211:{name: "繁昌区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,410322:{name: "孟津县",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,410306:{name: "吉利区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,421023:{name: "监利市",level:3}//新调整的区划 qq滞后直接删除，使用高德的
+	,520221:{name: "水城区",level:3}//新调整的区划 qq滞后直接删除，使用高德的
 };
 //和高德数据对比前qq添加统计局的数据
 var fixQQmapAddGovBeforeAmp={
@@ -48,11 +58,11 @@ var fixQQmapAddGovBeforeAmp={
 };
 //和高德数据对比前qq替换统计局数据，就是这些id对应的数据都采用统计局的数据
 var fixQQmapReplaceGovBeforeAmp={
-	3205:{
+	/*3205:{
 		name:"苏州市",level:2
 		,msg:"统计局、高德都有一个工业园（高德里面全国唯一一个，百度地图也有），并且边界也是独立出来的，qq缺少了并且子级在分散在各城区"
-	}
-	,6328:{
+	},*/
+	6328:{
 		name:"海西",level:2,msg:"qq的大柴旦不正常，整个都用统计局的"
 	}
 };
@@ -87,10 +97,8 @@ var fixQQmapReplaceFill={
 	
 	//新改名的，qq未及时更新，需更新为新名称
 	//同名保持住，mca是老的，配置上会打标识
-	,320684:{name:"海门区",newName:"海门区"}
 	,350681:{name:"龙海市",newName:"龙海区"}
-	,421023:{name:"监利市",newName:"监利市"}
-	,520221:{name:"水城区",newName:"水城区"}
+	,410381:{name:"偃师市",newName:"偃师区"}
 	
 	//移除已废弃的
 	,460321:{name:"西沙群岛",remove:true}
@@ -115,6 +123,15 @@ var amapDifference={
 	,632825:{lostName:"海西蒙古族藏族自治州直辖"}//qq统计局为632857大柴旦行政委员会
 	,460301:{lostName:"西沙区",lostAdd:true}//新设区
 	,460302:{lostName:"南沙区",lostAdd:true}//新设区
+	
+	,320613: {lostName: "崇川区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,320614: {lostName: "海门区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,330113: {lostName: "钱塘区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,330114: {lostName: "临平区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,340212: {lostName: "繁昌区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,410306: {lostName: "孟津区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,421088: {lostName: "监利市",lostAdd:true}//新调整的区划 qq滞后，使用高德的
+	,520204: {lostName: "水城区",lostAdd:true}//新调整的区划 qq滞后，使用高德的
 };
 
 
@@ -146,6 +163,12 @@ var gov3Difference={
 	,340221:{lostName:"芜湖县"} 
 	,340222:{lostName:"繁昌县"} 
 	,350402:{lostName:"梅列区"} 
+	,320684:{lostName: "海门市"}
+	,330103:{lostName: "下城区"}
+	,330104:{lostName: "江干区"}
+	,410322:{lostName: "孟津县"}
+	,421023:{lostName: "监利县"}
+	,520221:{lostName: "水城县"}
 	
 	,460321:{lostName:"西沙群岛"} //下面新出的导致丢失
 	,460322:{lostName:"南沙群岛"}
@@ -159,6 +182,8 @@ var gov3Difference={
 	//MAC没有的，但是是新出的
 	,460301:{name:"西沙区",keep:true}
 	,460302:{name:"南沙区",keep:true}
+	,330113:{name:"钱塘区",keep:true}
+	,330114:{name:"临平区",keep:true}
 };
 
 
@@ -706,7 +731,7 @@ var compareAmap=function(parent,qqmapArr,amapArrSrc,level){
 				throw new Error();
 			};
 			if(diffSet.lostAdd){
-				var addItm={name:itm.name,code:itm.code,child:[]};
+				var addItm={name:itm.name,code:itm.code,child:[],keepName:true};
 				qqmapArr.push(addItm);
 				console.log(addItm.code+":"+addItm.name+", 添加QQ没有的",addItm);
 			};
