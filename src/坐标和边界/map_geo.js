@@ -70,7 +70,7 @@ var pinyinList=window[PinyinWebApiSaveName].cityList;
 
 //人工fix数据
 var newNames={
-	450127:{name:"横州市"}
+	//450127:{name:"横州市"}
 };
 var fixNames=function(itm){
 	var tag=itm.id+":"+itm.fullPath.join(" ")+"：";
